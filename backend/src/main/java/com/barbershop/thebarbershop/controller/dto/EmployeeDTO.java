@@ -3,6 +3,7 @@ package com.barbershop.thebarbershop.controller.dto;
 import com.barbershop.thebarbershop.model.Employee;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class EmployeeDTO {
@@ -21,7 +22,7 @@ public class EmployeeDTO {
 
     public void setNome(String nome) { this.nome = nome; }
 
-    public static List<EmployeeDTO> converter(List<Employee> topicos) {
-        return topicos.stream().map(EmployeeDTO::new).collect(Collectors.toList());
+    public static List<EmployeeDTO> converter(List<Employee> employees) {
+        return employees.stream().map(EmployeeDTO::new).collect(Collectors.toList());
     }
 }
