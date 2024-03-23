@@ -23,7 +23,7 @@ export class ApiServices {
   }
 
   getServiceList() {
-    return this.http.get<Array<ServiceDTO>>(`${this.url}/service`)
+    return this.http.get<Array<ServiceDTO>>(`${this.url}/service/list`)
   }
 
   getServiceById(id: string) {
