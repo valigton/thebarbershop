@@ -12,6 +12,8 @@ public class ServiceDTO {
     private String description;
     private Double price;
 
+    public ServiceDTO(){ }
+
     public ServiceDTO(Service service) {
         this.id = service.getId();
         this.title = service.getTitle();

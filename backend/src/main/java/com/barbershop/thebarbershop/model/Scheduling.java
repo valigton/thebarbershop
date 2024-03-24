@@ -1,5 +1,8 @@
 package com.barbershop.thebarbershop.model;
 
+import com.barbershop.thebarbershop.repository.EmployeeRepository;
+import com.barbershop.thebarbershop.repository.ServiceRepository;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -16,11 +19,23 @@ public class Scheduling {
     private String clientEmail;
     private Date date;
     @JdbcTypeCode(SqlTypes.JSON)
+    @JsonProperty("employee")
     @ManyToOne(fetch = FetchType.LAZY)
     private Employee employee;
     @JdbcTypeCode(SqlTypes.JSON)
+    @JsonProperty("service")
     @ManyToOne(fetch = FetchType.LAZY)
     private Service service;
+
+    public Scheduling() { }
+
+    public Scheduling(String clientName, String clientEmail, Date date, Employee employee, Service service) {
+        this.clientName = clientName;
+        this.clientEmail = clientEmail;
+        this.date = date;
+        this.employee = employee;
+        this.service = service;
+    }
 
     public Long getId() { return id; }
 

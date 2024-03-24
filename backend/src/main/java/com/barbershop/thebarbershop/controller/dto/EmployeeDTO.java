@@ -10,6 +10,8 @@ public class EmployeeDTO {
     private Long id;
     private String nome;
 
+    public EmployeeDTO() { }
+
     public EmployeeDTO(Employee employee) {
         this.id = employee.getId();
         this.nome = employee.getNome();

@@ -1,6 +1,11 @@
 package com.barbershop.thebarbershop.controller.dto;
 
+import com.barbershop.thebarbershop.model.Employee;
 import com.barbershop.thebarbershop.model.Scheduling;
+import com.barbershop.thebarbershop.model.Service;
+import com.barbershop.thebarbershop.repository.EmployeeRepository;
+import com.barbershop.thebarbershop.repository.ServiceRepository;
+import com.barbershop.thebarbershop.util.Utils;
 
 import java.util.Date;
 import java.util.List;
@@ -13,15 +18,6 @@ public class SchedulingDTO {
     private Date date;
     private EmployeeDTO employee;
     private ServiceDTO service;
-
-    public SchedulingDTO(Scheduling scheduling) {
-        this.id = scheduling.getId();
-        this.clientName = scheduling.getClientName();
-        this.clientEmail = scheduling.getClientEmail();
-        this.date = scheduling.getDate();
-//        this.employee = scheduling.getEmployee();
-//        this.service = scheduling.getService();
-    }
 
     public Long getId() { return id; }
 
@@ -47,7 +43,10 @@ public class SchedulingDTO {
 
     public void setService(ServiceDTO service) { this.service = service; }
 
-    public static List<SchedulingDTO> converter(List<Scheduling> employees) {
-        return employees.stream().map(SchedulingDTO::new).collect(Collectors.toList());
+    public Scheduling converter(EmployeeRepository employeeRepository, ServiceRepository serviceRepository) {
+        Employee employeeVO = employeeRepository.getEmployeeById(employee.getId());
+        Service serviceVO = serviceRepository.getServiceById(service.getId());
+
+        return new Scheduling(clientName, clientEmail, date, employeeVO, serviceVO);
     }
 }

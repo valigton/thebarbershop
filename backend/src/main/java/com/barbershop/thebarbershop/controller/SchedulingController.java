@@ -2,14 +2,13 @@ package com.barbershop.thebarbershop.controller;
 
 import com.barbershop.thebarbershop.controller.dto.SchedulingDTO;
 import com.barbershop.thebarbershop.model.Scheduling;
+import com.barbershop.thebarbershop.repository.EmployeeRepository;
 import com.barbershop.thebarbershop.repository.SchedulingRepository;
+import com.barbershop.thebarbershop.repository.ServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
-import java.util.List;
 
 @Controller
 @RequestMapping("/scheduling")
@@ -17,13 +16,10 @@ public class SchedulingController {
 
     @Autowired
     SchedulingRepository schedulingRepository;
-
-    @GetMapping("/list")
-    @ResponseBody
-    public List<SchedulingDTO> schedulingList() {
-        List<Scheduling> schedulings = schedulingRepository.findAll();
-        return SchedulingDTO.converter(schedulings);
-    }
+    @Autowired
+    EmployeeRepository employeeRepository;
+    @Autowired
+    ServiceRepository serviceRepository;
 
     @GetMapping("/{id}")
     @ResponseBody
@@ -33,9 +29,13 @@ public class SchedulingController {
     }
 
     @PostMapping("/save")
-    @ResponseBody
-    public ResponseEntity<?> saveScheduling(SchedulingDTO schedulingDTO) {
-        Date date = schedulingDTO.getDate();
+    public ResponseEntity<?> saveScheduling(@RequestBody SchedulingDTO schedulingDTO) {
+        if(schedulingDTO == null) {
+            return null;
+        }
+        Scheduling scheduling = schedulingDTO.converter(employeeRepository, serviceRepository);
+        schedulingRepository.save(scheduling);
+
         return ResponseEntity.ok().body("ok");
     }
  }
