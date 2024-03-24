@@ -1,5 +1,13 @@
 <div class="main-div">
-    <div class="main-itens">
+    <form [formGroup]="form" class="main-itens" >
+      <mat-form-field>
+        <mat-label>Nome</mat-label>
+        <input matInput #name formControlName="name" [value]="clientName">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput #email formControlName="email" [value]="clientEmail">
+      </mat-form-field>
         <mat-form-field>
           <mat-label>Selecione um funcionario:</mat-label>
           <mat-select [(value)]="selectedEmployee">
@@ -31,5 +39,5 @@
         <div class="example-button-row">
           <button mat-raised-button color="primary" (click)="agendar()">Realizar agendamento</button>
         </div>
-    </div>
+    </form>
 </div>

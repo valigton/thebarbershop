@@ -8,6 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
+import { TextFieldModule } from '@angular/cdk/text-field';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { EmployeeDTO } from '../../dto/EmployeeDTO';
 import { ApiServices } from '../../service/ApiServices';
@@ -18,12 +20,22 @@ import { SchedulingDTO } from '../../dto/SchedulingDTO';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MatFormFieldModule, MatSelectModule, CommonModule, MatDatepickerModule, MatInputModule, MatIconModule, MatDividerModule, MatButtonModule],
+  imports: [
+    MatFormFieldModule, 
+    MatSelectModule, 
+    CommonModule, 
+    MatDatepickerModule, 
+    MatInputModule, 
+    MatIconModule, 
+    MatDividerModule, 
+    MatButtonModule, 
+    TextFieldModule,
+    ReactiveFormsModule
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
-
   public employeeList:Array<EmployeeDTO> = [];
   public serviceList:Array<ServiceDTO> = [];
   public postObject: SchedulingDTO = new SchedulingDTO();
@@ -31,7 +43,14 @@ export class HomeComponent implements OnInit {
   public serviceDTO: ServiceDTO = new ServiceDTO;
   selectedEmployee:string = "";
   selectedService:string = "";
+  clientName = "";
+  clientEmail = "";
   selectedDate:Date = new Date();
+
+  form = new FormGroup({
+    name: new FormControl(),
+    email: new FormControl()
+  });
   
   constructor(
     private apiService: ApiServices,
@@ -50,15 +69,18 @@ export class HomeComponent implements OnInit {
   }
 
   agendar() {
+    let formValue = this.form.value;
+
     this.employeeDTO.id = parseInt(this.selectedEmployee); 
     this.serviceDTO.id = parseInt(this.selectedService);
+    this.postObject.clientName = formValue.name;
+    this.postObject.clientEmail = formValue.email;
     this.postObject.employee = this.employeeDTO;
     this.postObject.service = this.serviceDTO;
-    this.postObject.date = this.selectedDate;
+    this.postObject.date = this.selectedDate;   
 
     this.apiService.saveScheduling(this.postObject).subscribe((response) =>{
       console.log(response);
     });
-
   }
 }

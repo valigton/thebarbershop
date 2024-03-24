@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser'
 import { provideNativeDateAdapter } from '@angular/material/core';
 
 import { routes } from './app.routes';
+import {  FormsModule ,ReactiveFormsModule } from '@angular/forms';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,6 +14,8 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideAnimations(),
     provideNativeDateAdapter(),
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 };
