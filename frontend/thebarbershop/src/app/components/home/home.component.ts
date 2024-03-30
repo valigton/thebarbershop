@@ -43,13 +43,11 @@ export class HomeComponent implements OnInit {
   public serviceDTO: ServiceDTO = new ServiceDTO;
   selectedEmployee:string = "";
   selectedService:string = "";
-  clientName = "";
-  clientEmail = "";
-  selectedDate:Date = new Date();
 
   form = new FormGroup({
     name: new FormControl(),
-    email: new FormControl()
+    email: new FormControl(),
+    data: new FormControl(),
   });
   
   constructor(
@@ -73,11 +71,12 @@ export class HomeComponent implements OnInit {
 
     this.employeeDTO.id = parseInt(this.selectedEmployee); 
     this.serviceDTO.id = parseInt(this.selectedService);
+    
     this.postObject.clientName = formValue.name;
     this.postObject.clientEmail = formValue.email;
     this.postObject.employee = this.employeeDTO;
     this.postObject.service = this.serviceDTO;
-    this.postObject.date = this.selectedDate;   
+    this.postObject.date = formValue.data;   
 
     this.apiService.saveScheduling(this.postObject).subscribe((response) =>{
       console.log(response);
