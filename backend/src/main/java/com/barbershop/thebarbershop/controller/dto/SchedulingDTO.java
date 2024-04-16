@@ -15,6 +15,7 @@ public class SchedulingDTO {
     private Long id;
     private String clientName;
     private String clientEmail;
+    private String clientPhoneNumber;
     private Date date;
     private EmployeeDTO employee;
     private ServiceDTO service;
@@ -30,6 +31,10 @@ public class SchedulingDTO {
     public String getClientEmail() { return clientEmail; }
 
     public void setClientEmail(String clientEmail) { this.clientEmail = clientEmail; }
+
+    public String getClientPhoneNumber() { return clientPhoneNumber; }
+
+    public void setClientPhoneNumber(String clientPhoneNumber) { this.clientPhoneNumber = clientPhoneNumber; }
 
     public Date getDate() { return date; }
 
@@ -47,6 +52,6 @@ public class SchedulingDTO {
         Employee employeeVO = employeeRepository.getEmployeeById(employee.getId());
         Service serviceVO = serviceRepository.getServiceById(service.getId());
 
-        return new Scheduling(clientName, clientEmail, date, employeeVO, serviceVO);
+        return new Scheduling(clientName, clientEmail, clientPhoneNumber, date, employeeVO, serviceVO);
     }
 }

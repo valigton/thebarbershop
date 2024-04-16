@@ -5,6 +5,7 @@ export class SchedulingDTO {
     public id?: number;
     public clientName?: string;
     public clientEmail?: string;
+    public clientPhoneNumber?: string;
     public date?: Date;
     public employee?: EmployeeDTO;
     public service?: ServiceDTO;

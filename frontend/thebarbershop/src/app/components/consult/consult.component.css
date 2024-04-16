@@ -4,15 +4,8 @@
     justify-content: center;
     flex-direction: column;
 }
-
 .main-itens {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
-
-.button-row {
-    display: table-cell;
-    max-width: 600px;
-    margin: 5px;
 }

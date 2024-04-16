@@ -17,6 +17,7 @@ public class Scheduling {
     private Long id;
     private String clientName;
     private String clientEmail;
+    private String clientPhoneNumber;
     private Date date;
     @JdbcTypeCode(SqlTypes.JSON)
     @JsonProperty("employee")
@@ -29,9 +30,10 @@ public class Scheduling {
 
     public Scheduling() { }
 
-    public Scheduling(String clientName, String clientEmail, Date date, Employee employee, Service service) {
+    public Scheduling(String clientName, String clientEmail, String clientPhoneNumber, Date date, Employee employee, Service service) {
         this.clientName = clientName;
         this.clientEmail = clientEmail;
+        this.clientPhoneNumber = clientPhoneNumber;
         this.date = date;
         this.employee = employee;
         this.service = service;
@@ -48,6 +50,10 @@ public class Scheduling {
     public String getClientEmail() { return clientEmail; }
 
     public void setClientEmail(String clientEmail) { this.clientEmail = clientEmail; }
+
+    public String getClientPhoneNumber() { return clientPhoneNumber; }
+
+    public void setClientPhoneNumber(String clientPhoneNumber) { this.clientPhoneNumber = clientPhoneNumber; }
 
     public Date getDate() { return date; }
 
