@@ -18,7 +18,7 @@ import { DataSource } from '@angular/cdk/collections';
 })
 export class ConsultComponent {
   public postObject: SchedulingDTO = new SchedulingDTO();
-  displayedColumns: string[] = ['nome', 'serviço', 'profissional', 'data', 'horario'];
+  displayedColumns: string[] = ['nome', 'serviço', 'profissional', 'data', 'horario', 'edit', 'delete'];
   dataSource:SchedulingDTO[] = [];
 
   form = new FormGroup({
@@ -37,7 +37,10 @@ export class ConsultComponent {
 
     this.apiService.getScheduling(this.postObject).subscribe((res) => {
       this.dataSource = res;
-      console.log(this.dataSource);
     });
+  }
+
+  editarAgendamento(id:number) {
+    this.router.navigateByUrl('/agendamento/'+ id);
   }
 }

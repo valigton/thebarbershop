@@ -8,12 +8,15 @@ import com.barbershop.thebarbershop.repository.EmployeeRepository;
 import com.barbershop.thebarbershop.repository.SchedulingRepository;
 import com.barbershop.thebarbershop.repository.ServiceRepository;
 import com.barbershop.thebarbershop.util.Utils;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -44,13 +47,34 @@ public class SchedulingController {
         return list;
     }
 
+    @GetMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<?> schedulingById(@PathVariable Long id) {
+        Scheduling scheduling = schedulingRepository.getSchedulingById(id);
+
+        SchedulingDTO dto = Utils.getSchedulingDTO(scheduling);
+
+        return ResponseEntity.ok(dto);
+    }
+
     @PostMapping("/save")
-    public ResponseEntity<?> saveScheduling(@RequestBody SchedulingDTO schedulingDTO) {
+    public ResponseEntity<?> saveOrUpdateScheduling(@RequestBody SchedulingDTO schedulingDTO) throws JsonMappingException {
         if(schedulingDTO == null) {
             return null;
         }
-        Scheduling scheduling = schedulingDTO.converter(employeeRepository, serviceRepository);
-        schedulingRepository.save(scheduling);
+
+        Scheduling scheduling = schedulingRepository.getSchedulingById(schedulingDTO.getId());
+
+        if(scheduling.getId() != null) {
+            //update object
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.updateValue(scheduling, schedulingDTO);
+            schedulingRepository.save(scheduling);
+        } else {
+            //save object
+            scheduling = schedulingDTO.converter(employeeRepository, serviceRepository);
+            schedulingRepository.save(scheduling);
+        }
 
         return ResponseEntity.ok().body("ok");
     }

@@ -1,5 +1,47 @@
 <div class="main-div">
-    <form [formGroup]="form" class="main-itens" >
+    <form *ngIf="!this.edit" [formGroup]="form" class="main-itens" >
+      <mat-form-field>
+        <mat-label>Nome</mat-label>
+        <input matInput #name formControlName="name">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Celular</mat-label>
+        <input matInput #phone formControlName="phone">
+      </mat-form-field>
+        <mat-form-field>
+          <mat-label>Selecione um funcionario:</mat-label>
+          <mat-select [(value)]="selectedEmployee">
+            <mat-option></mat-option>
+            <ng-container *ngFor="let employee of employeeList ">
+              <mat-option [value]="employee.id">
+                {{ employee.nome }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Selecione um serviço:</mat-label>
+          <mat-select [(value)]="selectedService">
+            <mat-option></mat-option>
+            <ng-container *ngFor="let service of serviceList ">
+              <mat-option [value]="service.id">
+                {{ service.title }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Selecione um horario:</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="data">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div class="example-button-row">
+          <button mat-raised-button color="primary" (click)="agendar()">Realizar agendamento</button>
+        </div>
+    </form>
+
+    <form *ngIf="this.edit" [formGroup]="form" class="main-itens" >
       <mat-form-field>
         <mat-label>Nome</mat-label>
         <input matInput #name formControlName="name">

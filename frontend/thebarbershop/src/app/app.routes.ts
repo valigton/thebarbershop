@@ -7,6 +7,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'agendamento', component: SchedulingComponent },
+  { path: 'agendamento/:id', component: SchedulingComponent },
   { path: 'consulta', component: ConsultComponent },
   {path: '**', component: PageNotFoundComponent},
 ];
