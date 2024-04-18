@@ -21,6 +21,7 @@ public class Utils {
         dto.setId(scheduling.getId());
         dto.setClientName(scheduling.getClientName());
         dto.setClientEmail(scheduling.getClientEmail());
+        dto.setClientPhoneNumber(scheduling.getClientPhoneNumber());
         dto.setDate(scheduling.getDate());
 
         EmployeeDTO employeeDTO = new EmployeeDTO(scheduling.getEmployee());

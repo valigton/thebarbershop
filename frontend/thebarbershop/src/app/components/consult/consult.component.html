@@ -37,16 +37,20 @@
             
             <ng-container matColumnDef="edit">
               <th mat-header-cell *matHeaderCellDef>Editar</th>
-              <button mat-icon-button *matCellDef="let element" (click)="editarAgendamento(element.id)">
-                <mat-icon>edit</mat-icon>
-              </button>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button (click)="editarAgendamento(element.id)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </td>
             </ng-container>
 
             <ng-container matColumnDef="delete">
               <th mat-header-cell *matHeaderCellDef>Deletar</th>
-              <button mat-icon-button *matCellDef="let element" (click)="deletarAgendamento(element.id)">
-                <mat-icon>delete</mat-icon>
-              </button>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button (click)="deletarAgendamento(element.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
