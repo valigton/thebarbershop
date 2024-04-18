@@ -46,4 +46,8 @@ export class ConsultComponent {
   editarAgendamento(id:number) {
     this.router.navigateByUrl('/agendamento/'+ id);
   }
+
+  deletarAgendamento(id:number){
+    console.log(id);
+  }
 }
