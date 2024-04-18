@@ -6,13 +6,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { SchedulingDTO } from '../../dto/SchedulingDTO';
 import { ApiServices } from '../../service/ApiServices';
 import { MatInputModule } from '@angular/material/input';
-import {MatTableModule} from '@angular/material/table';
-import { DataSource } from '@angular/cdk/collections';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-consult',
   standalone: true,
-  imports: [MatFormFieldModule, TextFieldModule, CommonModule, ReactiveFormsModule,MatInputModule, MatTableModule],
+  imports: [MatFormFieldModule, TextFieldModule, CommonModule, ReactiveFormsModule,MatInputModule, MatTableModule, MatButtonModule, MatIconModule, RouterModule],
   templateUrl: './consult.component.html',
   styleUrl: './consult.component.css'
 })
@@ -27,6 +29,7 @@ export class ConsultComponent {
 
   constructor(
     private apiService: ApiServices,
+    private router: Router
   ){}
 
   ngOnInit(){}
