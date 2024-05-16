@@ -65,7 +65,7 @@ public class SchedulingController {
 
         Scheduling scheduling = schedulingRepository.getSchedulingById(schedulingDTO.getId());
 
-        if(scheduling.getId() != null) {
+        if(scheduling != null && scheduling.getId() != null) {
             //update object
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.updateValue(scheduling, schedulingDTO);
@@ -76,6 +76,20 @@ public class SchedulingController {
             schedulingRepository.save(scheduling);
         }
 
-        return ResponseEntity.ok().body("ok");
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteScheduling(@RequestBody SchedulingDTO schedulingDTO) {
+        if(schedulingDTO == null) {
+            return null;
+        }
+
+        Scheduling scheduling = schedulingRepository.getSchedulingById(schedulingDTO.getId());
+        if(scheduling != null){
+            schedulingRepository.deleteById(scheduling.getId());
+        }
+
+        return ResponseEntity.ok().build();
     }
  }

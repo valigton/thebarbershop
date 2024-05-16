@@ -3,6 +3,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    top: 80px
 }
 
 .main-itens {
@@ -14,7 +15,11 @@
 .button-row {
     display: table-cell;
     max-width: 600px;
-    margin: 5px;
+    margin: 10px;
+}
+
+button {
+    padding: 25px;
 }
 
 a {

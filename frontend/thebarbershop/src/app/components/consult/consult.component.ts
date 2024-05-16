@@ -47,7 +47,19 @@ export class ConsultComponent {
     this.router.navigateByUrl('/agendamento/'+ id);
   }
 
-  deletarAgendamento(id:number){
-    console.log(id);
+  deletarAgendamento(id:number) {
+    let postObject:SchedulingDTO = new SchedulingDTO;
+    postObject.id = id;
+
+    this.dialog.open(DialogDeleteComponent, {
+      width: '250px'
+    }).afterClosed().subscribe((res) => {
+      if(res) {
+        this.apiService.deleteScheduling(postObject).subscribe((response) => {
+          console.log(response);
+          this.consultar; 
+         });
+      }
+    });
   }
 }

@@ -10,6 +10,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 
 import { EmployeeDTO } from '../../dto/EmployeeDTO';
 import { ApiServices } from '../../service/ApiServices';
@@ -57,7 +58,9 @@ export class SchedulingComponent {
   
   constructor(
     private apiService: ApiServices,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    public dialog: MatDialog
   ){}
 
   ngOnInit() {
@@ -99,8 +102,12 @@ export class SchedulingComponent {
     this.postObject.service = this.serviceDTO;
     this.postObject.date = formValue.data;   
 
-    this.apiService.saveScheduling(this.postObject).subscribe((response) =>{
-      console.log(response);
+    this.apiService.saveScheduling(this.postObject).subscribe((response) => {
+      if(response) {
+       this.openDialog();
+      }
+    },(error: Error) =>{
+      console.log(error)
     });
   }
 
@@ -114,4 +121,12 @@ export class SchedulingComponent {
     this.selectedService = obj.service?.id;
   }
 
+  openDialog() {
+    this.dialog.open(DialogInfoComponent, {
+      data:{ 
+        title: "Sucesso",
+        content: "Salvo com sucesso!"
+      }
+    });
+  }
 }

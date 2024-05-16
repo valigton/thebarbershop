@@ -4,9 +4,13 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser'
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { FormsModule ,ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+
+import { InputMaskModule } from '@ngneat/input-mask';
 
 import { routes } from './app.routes';
-import {  FormsModule ,ReactiveFormsModule } from '@angular/forms';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +20,9 @@ export const appConfig: ApplicationConfig = {
     provideNativeDateAdapter(),
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule,
+    CommonModule,
+    InputMaskModule
   ]
 };
