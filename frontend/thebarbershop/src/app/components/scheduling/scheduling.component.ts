@@ -16,6 +16,8 @@ import { EmployeeDTO } from '../../dto/EmployeeDTO';
 import { ApiServices } from '../../service/ApiServices';
 import { ServiceDTO } from '../../dto/ServiceDTO';
 import { SchedulingDTO } from '../../dto/SchedulingDTO';
+import { DialogInfoComponent } from '../dialog-info/dialog-info.component';
+import { InputMaskModule, createMask } from '@ngneat/input-mask';
 
 @Component({
   selector: 'app-scheduling',
@@ -30,7 +32,8 @@ import { SchedulingDTO } from '../../dto/SchedulingDTO';
     MatDividerModule, 
     MatButtonModule, 
     TextFieldModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    InputMaskModule
   ],
   templateUrl: './scheduling.component.html',
   styleUrl: './scheduling.component.css'
@@ -47,6 +50,7 @@ export class SchedulingComponent {
   selectedService:number|undefined = 0;
   edit: boolean = false;
   id: string|null = "";
+  phoneInputMask = createMask('([99])99999-9999');
 
   form = new FormGroup({
     id: new FormControl(),

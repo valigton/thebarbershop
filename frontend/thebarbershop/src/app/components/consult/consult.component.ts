@@ -10,11 +10,15 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterModule } from '@angular/router';
+import { InputMaskModule, createMask } from '@ngneat/input-mask';
+import { DialogInfoComponent } from '../dialog-info/dialog-info.component';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogDeleteComponent } from '../scheduling/dialog-delete/dialog-delete.component';
 
 @Component({
   selector: 'app-consult',
   standalone: true,
-  imports: [MatFormFieldModule, TextFieldModule, CommonModule, ReactiveFormsModule,MatInputModule, MatTableModule, MatButtonModule, MatIconModule, RouterModule],
+  imports: [MatFormFieldModule, TextFieldModule, CommonModule, ReactiveFormsModule,MatInputModule, MatTableModule, MatButtonModule, MatIconModule, RouterModule, InputMaskModule],
   templateUrl: './consult.component.html',
   styleUrl: './consult.component.css'
 })
@@ -23,13 +27,16 @@ export class ConsultComponent {
   displayedColumns: string[] = ['nome', 'serviço', 'profissional', 'data', 'horario', 'edit', 'delete'];
   dataSource:SchedulingDTO[] = [];
 
+  phoneInputMask = createMask('([99])99999-9999');
+
   form = new FormGroup({
     phone: new FormControl()
   });
 
   constructor(
     private apiService: ApiServices,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ){}
 
   ngOnInit(){}

@@ -2,7 +2,7 @@
     <form [formGroup]="form" class="main-itens">
         <mat-form-field>
             <mat-label>Celular</mat-label>
-            <input matInput #phone formControlName="phone">
+            <input matInput #phone formControlName="phone" [inputMask]="phoneInputMask">
         </mat-form-field>
         <div class="example-button-row">
             <button mat-raised-button color="primary" [disabled]="!this.form.valid" (click)="consultar()">Consultar agendamento</button>
@@ -27,12 +27,12 @@
 
             <ng-container matColumnDef="data">
               <th mat-header-cell *matHeaderCellDef>Data</th>
-              <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.date | date: 'dd/MM/yyyy'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="horario">
                 <th mat-header-cell *matHeaderCellDef>Horário</th>
-                <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                <td mat-cell *matCellDef="let element"> {{ element.date | date: 'HH:ss'}} </td>
             </ng-container>
             
             <ng-container matColumnDef="edit">
