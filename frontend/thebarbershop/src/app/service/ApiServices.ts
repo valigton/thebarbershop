@@ -46,8 +46,8 @@ export class ApiServices {
     return this.http.put<SchedulingDTO>(`${this.url}/scheduling/edit`, dto)
   }
 
-  deleteScheduling(dto: SchedulingDTO){
-    return this.http.delete<any>(`${this.url}/scheduling/delete`)
+  deleteScheduling(id: string){
+    return this.http.delete<any>(`${this.url}/scheduling/delete/${id}`)
   }
 
 }

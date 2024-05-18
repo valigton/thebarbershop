@@ -17,5 +17,11 @@ import {MatButtonModule} from '@angular/material/button';
   styleUrl: './dialog-delete.component.css'
 })
 export class DialogDeleteComponent {
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, 
+    private dialogRef: MatDialogRef<DialogDeleteComponent>
+  ) {}
+
+  yesButtonClicked(): void {
+    this.dialogRef.close(true);
+  }
 }

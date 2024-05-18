@@ -13,7 +13,7 @@ import { Router, RouterModule } from '@angular/router';
 import { InputMaskModule, createMask } from '@ngneat/input-mask';
 import { DialogInfoComponent } from '../dialog-info/dialog-info.component';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogDeleteComponent } from '../scheduling/dialog-delete/dialog-delete.component';
+import { DialogDeleteComponent } from './dialog-delete/dialog-delete.component';
 
 @Component({
   selector: 'app-consult',
@@ -54,17 +54,13 @@ export class ConsultComponent {
     this.router.navigateByUrl('/agendamento/'+ id);
   }
 
-  deletarAgendamento(id:number) {
-    let postObject:SchedulingDTO = new SchedulingDTO;
-    postObject.id = id;
-
+  deletarAgendamento(id: any) {
     this.dialog.open(DialogDeleteComponent, {
       width: '250px'
     }).afterClosed().subscribe((res) => {
       if(res) {
-        this.apiService.deleteScheduling(postObject).subscribe((response) => {
-          console.log(response);
-          this.consultar; 
+        this.apiService.deleteScheduling(id).subscribe((response) => {
+          this.consultar();
          });
       }
     });

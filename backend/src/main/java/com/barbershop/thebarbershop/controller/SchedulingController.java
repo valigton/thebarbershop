@@ -79,14 +79,14 @@ public class SchedulingController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteScheduling(@RequestBody SchedulingDTO schedulingDTO) {
-        if(schedulingDTO == null) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteScheduling(@PathVariable Long id) {
+        if(id == null) {
             return null;
         }
 
-        Scheduling scheduling = schedulingRepository.getSchedulingById(schedulingDTO.getId());
-        if(scheduling != null){
+        Scheduling scheduling = schedulingRepository.getSchedulingById(id);
+        if(scheduling != null) {
             schedulingRepository.deleteById(scheduling.getId());
         }
 
