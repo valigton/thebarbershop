@@ -18,7 +18,17 @@ import { DialogDeleteComponent } from './dialog-delete/dialog-delete.component';
 @Component({
   selector: 'app-consult',
   standalone: true,
-  imports: [MatFormFieldModule, TextFieldModule, CommonModule, ReactiveFormsModule,MatInputModule, MatTableModule, MatButtonModule, MatIconModule, RouterModule, InputMaskModule],
+  imports: [
+    MatFormFieldModule, 
+    TextFieldModule, 
+    CommonModule, 
+    ReactiveFormsModule,
+    MatInputModule, 
+    MatTableModule, 
+    MatButtonModule, 
+    MatIconModule, 
+    RouterModule, 
+    InputMaskModule],
   templateUrl: './consult.component.html',
   styleUrl: './consult.component.css'
 })

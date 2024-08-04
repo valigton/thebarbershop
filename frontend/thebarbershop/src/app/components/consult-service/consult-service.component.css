@@ -3,30 +3,15 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    top: 80px
 }
-
 .main-itens {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.button-row {
-    display: table-cell;
-    max-width: 600px;
-    margin: 10px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
 button {
     padding: 25px;
     margin-top: 5px;
     margin-bottom: 5px;
-}
-
-a {
-    color: white;
-    text-decoration: none;
 }

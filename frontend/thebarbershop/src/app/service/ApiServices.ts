@@ -26,6 +26,10 @@ export class ApiServices {
     return this.http.get<Array<ServiceDTO>>(`${this.url}/service/list`)
   }
 
+  getServiceByName(dto: SchedulingDTO) {
+    return this.http.post<Array<ServiceDTO>>(`${this.url}/service/name`, dto)
+  }
+
   getServiceById(id: string) {
     return this.http.get<ServiceDTO>(`${this.url}/service/${id}`)
   }
